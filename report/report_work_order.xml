@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            id="work_order_report"
+            string="Work Order"
+            model="work.order" 
+            report_type="qweb-pdf"
+            file="booking_order.report_work_order" 
+            name="booking_order.report_work_order" 
+        />
+    </data>
+</odoo>

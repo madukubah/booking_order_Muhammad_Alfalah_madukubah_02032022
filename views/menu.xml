@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="action_service_team">
+        <field name="name">Service Team</field>
+        <field name="res_model">service.team</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_work_order">
+        <field name="name">Work Order</field>
+        <field name="res_model">work.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban,calendar,graph,pivot</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_sale_booking_order">
+        <field name="name">Booking Order</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_booking_order', '=', 1 )]</field>
+        <!-- <field name="context">{"search_default_is_booking_order":1}</field> -->
+    </record>
+
+    <menuitem name="Booking"
+        id="menu_sale_booking"
+        parent="sales_team.menu_base_partner" 
+        />
+
+        <menuitem name="Booking Order"
+            id="menu_sale_booking_order"
+            parent="menu_sale_booking" 
+            action="action_sale_booking_order"
+            sequence= "1"
+            />
+
+        <menuitem name="Service Team"
+            id="menu_sale_service_team"
+            parent="menu_sale_booking" 
+            action="action_service_team"
+            sequence= "2"
+            />
+
+        <menuitem name="Work Order"
+            id="menu_sale_work_order"
+            parent="menu_sale_booking" 
+            action="action_work_order"
+            sequence= "3"
+            />
+
+</odoo>

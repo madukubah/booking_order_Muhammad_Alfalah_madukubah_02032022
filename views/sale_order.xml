@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sale_order_inherit_form" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/header/button[@name='action_confirm']" position="after">
+                <button name='action_check' string="Check" type='object' />
+            </xpath>
+            <xpath expr="/form/sheet/div[@name='button_box']" position="inside">
+                <button name="action_view_work_order"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    attrs="{'invisible': [('state', 'not in', ['sale', 'done'] )]}"
+                    string="Work Order"
+                    >
+                    <!-- <field name="name" widget="statinfo" string="Work Order"/> -->
+                </button>
+            </xpath>
+            <xpath expr="/form/sheet/group" position="before">
+                <group>
+                    <field name="is_booking_order" />
+                    <field name="service_team_id" />
+                    <field name="service_team_leader" />
+                    <field name="service_team_members" widget="many2many_tags" />
+                </group>
+                <group>
+                    <group>
+                        <field name="booking_start" />
+                    </group>
+                    <group>
+                        <field name="booking_end" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_sale_order_select0" model="ir.ui.view">
+        <field name="name">sale.order.select0</field>
+        <field name="model">sale.order</field>
+        <!-- <field name="inherit_id" ref="sale.view_sales_order_filter"/> -->
+        <field name="arch" type="xml">
+            <search string="Search Partner">
+                <filter string="Is Booking Order"
+                    name="is_booking_order" domain="[('is_booking_order','=',1)]" help="Is Booking Order"/>
+            </search>
+        </field>
+    </record>
+</odoo>
